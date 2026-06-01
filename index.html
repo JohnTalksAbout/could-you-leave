@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Could You Leave? | John Talks About</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500&display=swap');
+
+:root{
+  --bg:#1C1C1E;
+  --card:#2A2A2D;
+  --text:#F0F0EE;
+  --muted:#888888;
+  --accent:#4A6274;
+  --accent-light:#5B7A8F;
+  --border:#333336;
+  --positive:#4CAF78;
+  --negative:#C0544A;
+  --white:#FFFFFF;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html,body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  font-weight:400;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+
+body{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  padding:32px 20px 64px;
+}
+
+.wrap{width:100%;max-width:680px}
+
+.brandbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-bottom:20px;border-bottom:1px solid var(--border);margin-bottom:36px;
+}
+.brandbar .name{
+  font-family:'Playfair Display',serif;font-weight:700;font-size:18px;
+  color:var(--white);letter-spacing:0.01em;
+}
+.brandbar .tagline{
+  font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent-light);
+}
+
+.kicker{
+  font-family:'DM Sans',sans-serif;font-weight:500;font-size:12px;
+  text-transform:uppercase;letter-spacing:0.12em;color:var(--accent-light);margin-bottom:18px;
+}
+
+h1{
+  font-family:'Playfair Display',serif;font-weight:700;font-size:42px;
+  line-height:1.15;color:var(--white);text-transform:none;margin-bottom:24px;
+}
+
+.lead p{margin-bottom:16px;font-size:17px}
+.lead .sign{
+  font-family:'Playfair Display',serif;font-weight:700;font-size:18px;color:var(--text);margin-top:8px;
+}
+
+.btn{
+  display:inline-block;font-family:'DM Sans',sans-serif;font-weight:500;font-size:16px;
+  color:var(--white);background:var(--accent);border:1px solid var(--accent-light);
+  border-radius:4px;padding:14px 28px;cursor:pointer;transition:background 0.15s ease;
+}
+.btn:hover{background:var(--accent-light)}
+.btn:disabled{opacity:0.4;cursor:not-allowed}
+
+.btn-ghost{
+  background:transparent;border:1px solid var(--border);color:var(--muted);
+  font-size:14px;padding:10px 18px;
+}
+.btn-ghost:hover{color:var(--text);background:transparent;border-color:var(--accent)}
+
+.actions{margin-top:28px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+
+.progress-wrap{margin-bottom:32px}
+.progress-meta{
+  display:flex;justify-content:space-between;font-size:12px;text-transform:uppercase;
+  letter-spacing:0.1em;color:var(--muted);margin-bottom:10px;
+}
+.progress-track{height:4px;background:var(--border);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;background:var(--accent);width:0;transition:width 0.25s ease}
+
+.q-cat{
+  font-size:12px;text-transform:uppercase;letter-spacing:0.12em;
+  color:var(--accent-light);margin-bottom:14px;font-weight:500;
+}
+.q-text{
+  font-family:'Playfair Display',serif;font-weight:700;font-size:26px;
+  line-height:1.25;color:var(--white);margin-bottom:28px;
+}
+.options{display:flex;flex-direction:column;gap:12px}
+.opt{
+  text-align:left;background:var(--card);border:1px solid var(--border);border-radius:4px;
+  padding:16px 18px;font-size:16px;color:var(--text);cursor:pointer;
+  font-family:'DM Sans',sans-serif;line-height:1.5;
+  transition:border-color 0.12s ease, background 0.12s ease;
+}
+.opt:hover{border-color:var(--accent-light)}
+.opt.selected{border-color:var(--accent-light);background:#30343a}
+
+.q-nav{margin-top:28px;display:flex;justify-content:space-between;align-items:center}
+
+.score-block{text-align:left;margin-bottom:28px}
+.score-num{
+  font-family:'Playfair Display',serif;font-weight:700;font-size:84px;line-height:1;color:var(--white);
+}
+.score-num span{font-size:40px;color:var(--muted)}
+.score-bar-track{height:8px;background:var(--border);border-radius:4px;overflow:hidden;margin-top:18px}
+.score-bar-fill{height:100%;background:var(--accent);width:0;transition:width 0.6s ease}
+
+.verdict{font-size:18px;margin:24px 0 8px}
+
+.locked-intro{font-size:16px;color:var(--text);margin:24px 0 16px}
+.locked-list{display:flex;flex-direction:column;gap:10px;margin-bottom:8px}
+.locked-row{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--card);border:1px solid var(--border);border-radius:4px;
+  padding:15px 18px;
+}
+.locked-name{font-size:16px;color:var(--text)}
+.locked-fig{display:flex;align-items:center;gap:9px;color:var(--muted)}
+.locked-bars{display:flex;gap:3px}
+.locked-bars span{width:4px;height:14px;background:var(--border);border-radius:1px}
+.locked-lockicon{
+  font-size:12px;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);
+}
+.standout{border-color:var(--accent-light)}
+.standout .locked-name{color:var(--white)}
+
+.share{border-top:1px solid var(--border);margin-top:8px;padding-top:28px}
+.share-line{font-size:16px;color:var(--text);margin-bottom:16px}
+.share-box{
+  background:var(--card);border:1px solid var(--border);border-radius:4px;
+  padding:16px 18px;font-size:15px;color:var(--text);line-height:1.6;margin-bottom:16px;
+}
+.share-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.share-status{display:block;font-size:13px;color:var(--positive);margin-top:12px;min-height:16px}
+
+.gate{
+  background:var(--card);border:1px solid var(--border);border-radius:4px;padding:28px;margin-top:28px;
+}
+.gate h2{
+  font-family:'Playfair Display',serif;font-weight:700;font-size:22px;
+  color:var(--white);margin-bottom:14px;text-transform:none;
+}
+.gate p{font-size:15px;color:var(--text);margin-bottom:18px}
+.gate .fineprint{font-size:13px;color:var(--muted);margin-top:14px;margin-bottom:0}
+.email-row{display:flex;flex-direction:column;gap:10px}
+.email-row input{
+  width:100%;background:var(--bg);border:1px solid var(--border);border-radius:4px;
+  padding:14px 16px;font-family:'DM Sans',sans-serif;font-size:16px;color:var(--text);
+}
+.email-row input:focus{outline:none;border-color:var(--accent-light)}
+.email-row .btn{align-self:flex-start}
+.error{color:var(--negative);font-size:14px;margin-top:10px;display:none}
+
+.breakdown{margin-top:8px}
+.cat-row{border-top:1px solid var(--border);padding:22px 0}
+.cat-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.cat-name{font-family:'Playfair Display',serif;font-weight:700;font-size:20px;color:var(--white)}
+.cat-pct{font-family:'Playfair Display',serif;font-weight:700;font-size:20px}
+.cat-bar-track{height:5px;background:var(--border);border-radius:4px;overflow:hidden;margin:10px 0 14px}
+.cat-bar-fill{height:100%;border-radius:4px}
+.cat-line{font-size:15px;color:var(--text)}
+
+.closing{border-top:1px solid var(--border);margin-top:8px;padding-top:28px}
+.closing p{font-size:16px;margin-bottom:14px}
+.closing .sign{font-family:'Playfair Display',serif;font-weight:700;font-size:18px;color:var(--text)}
+
+.footer{
+  margin-top:48px;padding-top:20px;border-top:1px solid var(--border);
+  font-size:13px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
+}
+.footer a{color:var(--accent-light);text-decoration:none}
+
+.hidden{display:none}
+
+@media (max-width:520px){
+  body{padding:24px 16px 48px}
+  h1{font-size:32px}
+  .q-text{font-size:22px}
+  .score-num{font-size:64px}
+  .score-num span{font-size:30px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="brandbar">
+    <span class="name">John Talks About</span>
+    <span class="tagline">Runway · Risk · Reality</span>
+  </div>
+
+  <!-- ============ SCREEN 1: INTRO ============ -->
+  <section id="intro">
+    <div class="kicker">A quick, honest questionnaire</div>
+    <h1>Could you actually leave?</h1>
+    <div class="lead">
+      <p>Right. Before we start, two things.</p>
+      <p>I am not an adviser and this is not advice. I left the UK in 2025 and since then I have watched a lot of people talk about doing the same. Some have looked at it properly. Most just like the idea.</p>
+      <p>This is twenty questions about which one you are. It will not tell you whether to go. It will tell you how honestly you have actually thought it through. Decide to stay, and stay on purpose, that scores just as well as deciding to leave. The only bad answer here is not looking.</p>
+      <p>It is a bit of fun. But the honest kind. Answer straight and it will tell you something. Answer how you wish you were and it will tell you nothing.</p>
+      <p class="sign">John</p>
+    </div>
+    <div class="actions">
+      <button class="btn" onclick="startQuiz()">Start</button>
+      <span style="font-size:13px;color:var(--muted)">Takes about three minutes</span>
+    </div>
+  </section>
+
+  <!-- ============ SCREEN 2: QUIZ ============ -->
+  <section id="quiz" class="hidden">
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span id="qcount">Question 1 of 20</span>
+        <span>Could you leave?</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+    <div class="q-cat" id="qCat"></div>
+    <div class="q-text" id="qText"></div>
+    <div class="options" id="qOptions"></div>
+    <div class="q-nav">
+      <button class="btn-ghost" id="backBtn" onclick="goBack()" style="visibility:hidden">Back</button>
+      <span style="font-size:13px;color:var(--muted)">Tap the honest answer</span>
+    </div>
+  </section>
+
+  <!-- ============ SCREEN 3: RESULT + GATE ============ -->
+  <section id="result" class="hidden">
+    <div class="kicker">Your result</div>
+    <div class="score-block">
+      <div class="score-num"><span id="scoreNum">0</span><span>%</span></div>
+      <div class="score-bar-track"><div class="score-bar-fill" id="scoreBar"></div></div>
+    </div>
+
+    <p class="locked-intro">Here are the five areas I measured you on. The scores are not always where people expect.</p>
+
+    <!-- locked category map: names shown, figures hidden -->
+    <div class="locked-list" id="lockedList"></div>
+
+    <div class="gate" id="gate">
+      <h2>The numbers might surprise you. Want to see them?</h2>
+      <p id="gateTeaser"></p>
+      <div class="email-row">
+        <input type="text" id="nameInput" placeholder="First name" autocomplete="given-name">
+        <input type="email" id="emailInput" placeholder="your@email.com" autocomplete="email">
+        <button class="btn" onclick="submitEmail()">Unlock my breakdown</button>
+      </div>
+      <div class="error" id="emailError">Pop your first name and a real email in and I will show you the breakdown.</div>
+      <p class="fineprint">This puts you on Slow Travel Letters, the same thing I write every Friday. One honest email a week. Leave any time, no hard feelings. John</p>
+    </div>
+  </section>
+
+  <!-- ============ SCREEN 4: BREAKDOWN ============ -->
+  <section id="breakdown" class="hidden">
+    <div class="kicker">The full picture</div>
+    <h1 style="font-size:32px;margin-bottom:8px">Here is where you actually stand.</h1>
+    <p class="verdict" id="verdict" style="margin-top:0;margin-bottom:22px"></p>
+    <div class="breakdown" id="catBreakdown"></div>
+    <div class="closing">
+      <p>Remember what this is. Not advice, and I am not your accountant.</p>
+      <p>The people who do this well are not the ones with the highest score. They are the ones who looked at it honestly, then either went, or decided to stay, on purpose. Both are good answers.</p>
+      <p>If you want the deeper version, the real numbers and the month by month reality, that is what the Friday letter is for. You are on it now.</p>
+      <p>I have just sent you an email to confirm. One click on it and the Friday letters start. If it is not in your inbox, have a look in your spam.</p>
+      <p class="sign">John</p>
+    </div>
+
+    <!-- share moment: recruit the next person to the quiz -->
+    <div class="share" id="share">
+      <p class="share-line">Know someone quietly running the same numbers? Send them this. See where they land.</p>
+      <div class="share-box" id="shareText"></div>
+      <div class="share-actions">
+        <button class="btn" id="copyBtn" onclick="copyShare()">Copy the link</button>
+        <button class="btn-ghost" id="nativeShareBtn" onclick="nativeShare()" style="display:none">Share</button>
+      </div>
+      <span class="share-status" id="shareStatus"></span>
+    </div>
+  </section>
+
+  <div class="footer">
+    <span>johntalksabout.com</span>
+    <span>A bit of fun, and surprisingly revealing. Not advice.</span>
+  </div>
+
+</div>
+
+<script>
+/* ============================================================
+   COULD YOU LEAVE?  v1
+   ------------------------------------------------------------
+   - No live AI in the user path. Questions, scoring and result
+     lines are fixed code. Nothing here to hijack.
+   - 60-question bank, twelve per category. Stratified draw of
+     four per category = 20 per play, so the breakdown always
+     scores all five areas.
+   - Option order is shuffled per question at draw time, so the
+     honest answer is never reliably in the same slot.
+   - Scoring: 3 faced it honestly, 2 honest but incomplete,
+     1 vague, 0 dodging or fantasising. "Sorted with a number"
+     scores high, "sorted" as a vibe scores low.
+   - All state in memory. No localStorage.
+   ============================================================ */
+
+const CATS = {
+  why:         "Why leave",
+  people:      "Family and people",
+  mindset:     "Age, stage and mindset",
+  money:       "Money readiness",
+  expectations:"Expectations and the hard questions"
+};
+
+/* ---- Question bank: 12 per category ----
+   Each option [text, score]. Authored order is irrelevant;
+   options are shuffled per question at draw time. */
+const BANK = [
+
+  /* ================= WHY LEAVE ================= */
+  {c:"why", q:"If your home country suddenly got cheaper, calmer and better run tomorrow, would you still want to go?", o:[
+    ["Yes. Even on a good day the ceiling felt too low",3],
+    ["Probably not, and that tells me something honest",2],
+    ["I genuinely do not know, I have never asked it that way",1],
+    ["No idea, I try not to poke at it",0]]},
+  {c:"why", q:"Be honest. Are you running toward a life, or away from this one?", o:[
+    ["Toward something specific I can actually describe",3],
+    ["A bit of both, and I have started untangling which is which",2],
+    ["Away, mostly. And I know the patterns can follow me",1],
+    ["Away. I have not thought past the getting out part",0]]},
+  {c:"why", q:"Why now, specifically?", o:[
+    ["Something concrete changed and I can name it",3],
+    ["It has built for years and I finally looked at it properly",2],
+    ["The idea just will not leave me alone",1],
+    ["I saw it online and it looked like the answer",0]]},
+  {c:"why", q:"If someone asked you straight why you want to leave, what would you say?", o:[
+    ["A clear answer I have said out loud before",3],
+    ["The easy version. The real one is more complicated",2],
+    ["Something vague about a better life",1],
+    ["I would struggle to put it into words",1]]},
+  {c:"why", q:"Have you worked out what you are actually running from?", o:[
+    ["Yes, and I have checked it is not something that follows me anywhere",3],
+    ["I know what it is. I am not sure leaving fixes it",2],
+    ["There is nothing I am running from, this is purely a pull, and I have tested that",2],
+    ["I would rather not look at that too closely",0]]},
+  {c:"why", q:"Is leaving the goal itself, or a means to something else?", o:[
+    ["A means, and I know what the something else is",3],
+    ["I have muddled the two together until now",2],
+    ["The goal itself. Getting out is the point",1],
+    ["Not thought about it that way",1]]},
+  {c:"why", q:"Have you tested whether you could get what you want without leaving?", o:[
+    ["Yes, and leaving is genuinely the better route",3],
+    ["No, but that is a fair question I should sit with",2],
+    ["I do not want to. I want the leaving part",1],
+    ["Had not crossed my mind",0]]},
+  {c:"why", q:"What does a fresh start actually mean to you, in plain words?", o:[
+    ["A specific change I can describe without the phrase fresh start",3],
+    ["I use the phrase more than I have defined it, and I know that",2],
+    ["Less of what I have got now",1],
+    ["Freedom, mostly",1]]},
+  {c:"why", q:"Does the itch to leave go away when life is going fine?", o:[
+    ["No. It is there on the good days too, which is the clue",3],
+    ["It quietens, but it never fully goes",2],
+    ["Mostly it is a bad-week feeling, and I am honest about that",2],
+    ["Never thought to watch for that",1]]},
+  {c:"why", q:"Is this about your home country changing, or you being worn down?", o:[
+    ["I have separated the two and I know which is which",3],
+    ["Both, and I have stopped pretending it is all one or the other",2],
+    ["All the country, none of me",1],
+    ["I have not pulled those apart",1]]},
+  {c:"why", q:"How long has this been a real thought, not a passing one?", o:[
+    ["Long enough that I have acted on parts of it",3],
+    ["A while, and it has only got clearer",2],
+    ["Recent, and I am still feeling it out",1],
+    ["It comes and goes with my mood",1]]},
+  {c:"why", q:"When you picture the life you are going to, how detailed is the picture?", o:[
+    ["Detailed. Right down to ordinary days",3],
+    ["Clearer than it was. Still some blanks I am filling",2],
+    ["Sunny and vague",1],
+    ["Honestly, just a feeling, not a picture",0]]},
+
+  /* ================= FAMILY AND PEOPLE ================= */
+  {c:"people", q:"The person you would go with. Do they want this as much as you do?", o:[
+    ["We have talked it right through. We are aligned",3],
+    ["I am going solo, no one to bring along",3],
+    ["They are willing. I am the one driving it",2],
+    ["I think so. We have not gone deep on it yet",1]]},
+  {c:"people", q:"When people say you can always come back if it does not work, what goes through your head?", o:[
+    ["I take the kindness, but my head is set on not needing to",3],
+    ["It is reassuring, and I have quietly planned for that option",2],
+    ["It is a comfort I lean on more than I should",1],
+    ["I have not let myself think about coming back at all",1]]},
+  {c:"people", q:"Elderly parents. Have you got an honest answer for that one?", o:[
+    ["Yes, we have talked it through as a family",3],
+    ["A rough plan, and I know it is imperfect",2],
+    ["It is the bit I keep avoiding",0],
+    ["Not relevant to me",3]]},
+  {c:"people", q:"If you have kids or grandkids, where do they sit in this?", o:[
+    ["Front and centre. I have worked out the visits and the cost",3],
+    ["I have thought about it and made my peace with the distance",2],
+    ["I push that thought away when it comes",0],
+    ["Does not apply to me",3]]},
+  {c:"people", q:"Have you told the people closest to you the real version of your plan?", o:[
+    ["Yes. The honest one, not the polished one",3],
+    ["A couple of people know the full picture",2],
+    ["They know the polished version. The rest is still mine",1],
+    ["Nobody knows how serious I am",1]]},
+  {c:"people", q:"Who would you miss most, and have you let yourself feel it?", o:[
+    ["Yes. I know exactly who, and I have sat with it",3],
+    ["I have an idea, but I keep it at arm's length",2],
+    ["Honestly nobody, and that is part of why I am going",2],
+    ["I will deal with it when it happens",0]]},
+  {c:"people", q:"Is anyone quietly relying on you staying put?", o:[
+    ["I have checked, and had the conversation",3],
+    ["Possibly, and I owe them that conversation",2],
+    ["No, I am clear on that",3],
+    ["I would rather not open that up",0]]},
+  {c:"people", q:"How have you handled the people who think you are mad for this?", o:[
+    ["I hear them out, and it is my life to live",3],
+    ["It stings, but it has not moved me off it",2],
+    ["I avoid the subject with them",1],
+    ["Their reaction makes me doubt the whole thing",1]]},
+  {c:"people", q:"What happens to the friendships you have spent decades building?", o:[
+    ["I have accepted most will fade, and I am at peace with that",3],
+    ["I tell myself we will stay close. Deep down I am not certain",2],
+    ["I will make new ones, I have done it before",2],
+    ["Had not factored that in",0]]},
+  {c:"people", q:"If your partner is the unsure one, how are you handling it?", o:[
+    ["Open conversation and a real trial run before anything is fixed",3],
+    ["No partner in this, the decision is mine alone",3],
+    ["We are talking, slowly. No pressure either way",2],
+    ["I am hoping they catch up to where I am",1]]},
+  {c:"people", q:"Who actually depends on you that you would be moving away from?", o:[
+    ["I have listed them and thought each one through",3],
+    ["One or two I worry about, and I have sat with it",2],
+    ["Nobody really, and I have genuinely checked that",3],
+    ["I try not to think about that part",0]]},
+  {c:"people", q:"Have you done a real trial run, alone or together, or just talked about it?", o:[
+    ["A proper long stay, not a holiday, so I know the reality",3],
+    ["A holiday or two, which I know is not the same thing",2],
+    ["All talk so far, the trip is the next step",1],
+    ["No, I am going straight for it",0]]},
+
+  /* ================= AGE, STAGE AND MINDSET ================= */
+  {c:"mindset", q:"What is your biggest fear about this, said plainly?", o:[
+    ["I can name it in one sentence",3],
+    ["A few, and I have looked at each one square on",3],
+    ["I feel it but I cannot quite put words to it",1],
+    ["I do not let myself dwell on fears",0]]},
+  {c:"mindset", q:"What part of yourself are you hoping changes when you land?", o:[
+    ["None. I know I take myself with me, and I have made peace with that",3],
+    ["One or two things, realistically",2],
+    ["Quite a lot, if I am honest",1],
+    ["I expect to feel like a completely different person",0]]},
+  {c:"mindset", q:"Have you lived abroad before, even briefly?", o:[
+    ["Yes, so I know what the reality actually feels like",3],
+    ["Long stays, which I know is not the full picture",2],
+    ["No, and I am honest that I am guessing",2],
+    ["No, but how hard can it be",0]]},
+  {c:"mindset", q:"How do you actually handle things not going to plan?", o:[
+    ["I have been tested and I know how I respond",3],
+    ["Reasonably, with some honest exceptions",2],
+    ["Not brilliantly, and I know that about myself",2],
+    ["Fine. Nothing really throws me",1]]},
+  {c:"mindset", q:"At your age and stage, what is the cost of getting this wrong?", o:[
+    ["I have worked out what wrong looks like and whether I would recover",3],
+    ["I have thought about it loosely",1],
+    ["Low for me, and I have checked that is actually true",2],
+    ["I prefer to stay positive about it",0]]},
+  {c:"mindset", q:"Are you adaptable, honestly, or do you just like to think you are?", o:[
+    ["I have got real evidence that I adapt",3],
+    ["I am set in my ways, and I am reckoning with that",2],
+    ["I would like to think so. The evidence is thin",1],
+    ["Very. I am sure of it",1]]},
+  {c:"mindset", q:"When you imagine a hard day out there, what do you picture?", o:[
+    ["Something specific and realistic",3],
+    ["I have had hard days abroad already, so I know",2],
+    ["Vaguely. I keep it sunny in my head",1],
+    ["I have not pictured a hard day at all",0]]},
+  {c:"mindset", q:"Is this a decision or a daydream right now?", o:[
+    ["A decision, with a date or a trigger",3],
+    ["Becoming a decision. I am doing the work",2],
+    ["A daydream I enjoy, and I will admit that",2],
+    ["Somewhere in between, and I have not pinned it down",1]]},
+  {c:"mindset", q:"There is no perfect age for this. Have you made peace with yours?", o:[
+    ["Yes. The urgency is part of why I am doing it now",3],
+    ["Mostly. Some days it feels late, some days right",2],
+    ["I worry I have left it too long",1],
+    ["I use my age as the reason not to look properly",0]]},
+  {c:"mindset", q:"How long have you been researching without anything actually moving?", o:[
+    ["Not long. Research turned into action quickly",3],
+    ["A while, and I can feel it tipping into avoidance",2],
+    ["Years. Though I tell myself it is diligence",1],
+    ["I research constantly and book nothing",0]]},
+  {c:"mindset", q:"Your habits with money, work, drink, whatever it is. Does a move fix that, or does it come with you?", o:[
+    ["It comes with me. I am working on it here first",3],
+    ["A move helps, but I know it is not a cure",2],
+    ["A fresh start will sort most of it",1],
+    ["Everything will be different once I am there",0]]},
+  {c:"mindset", q:"Do you treat this as permanent, or as something you can adjust?", o:[
+    ["An experiment I can change. That takes the fear out of it",3],
+    ["Mostly open, with a rough direction",2],
+    ["All or nothing. It has to work",1],
+    ["I have not framed it either way",1]]},
+
+  /* ================= MONEY READINESS ================= */
+  {c:"money", q:"Could you say your savings number out loud right now, to the pound?", o:[
+    ["Yes, and I have built a plan around it",3],
+    ["Yes, but I have not turned it into a plan yet",2],
+    ["Roughly. Within a bit",1],
+    ["I would rather not. Even to myself",0]]},
+  {c:"money", q:"Do you know your number, the monthly figure you would actually need?", o:[
+    ["Yes, to the pound, and I have tracked it",3],
+    ["Roughly, within a hundred or so",2],
+    ["A ballpark I have never written down",1],
+    ["No, and that is the honest answer",1]]},
+  {c:"money", q:"Have you tracked what you really spend, not what you think you spend?", o:[
+    ["Yes, for months, so I know the real figure",3],
+    ["I started, and it was a wake-up call",2],
+    ["I assume I know. I have not checked",1],
+    ["I avoid looking at it",0]]},
+  {c:"money", q:"If your income dropped by half for six months, what happens?", o:[
+    ["I have modelled it and I would be fine",3],
+    ["I would be stretched, but I know exactly how stretched",2],
+    ["I have not run that scenario",1],
+    ["I assume it would be fine",0]]},
+  {c:"money", q:"Where is the income coming from once the salary stops?", o:[
+    ["A specific plan I have tested",3],
+    ["Savings will carry me, and I have checked for how long",3],
+    ["A plan I believe in but have not proven",2],
+    ["I will work it out when I get there",0]]},
+  {c:"money", q:"Have you got a runway number, and do you know what eats it fastest?", o:[
+    ["Yes to both",3],
+    ["I know the runway, not the leaks",2],
+    ["I have heard the word, not done the sum",1],
+    ["No",1]]},
+  {c:"money", q:"I will figure the money out somehow. How close is that to your actual plan?", o:[
+    ["Nowhere near. I have done the maths",3],
+    ["Nothing to figure out. I am sorted, and I know the figure",3],
+    ["A bit too close, and you have just caught me",2],
+    ["That is more or less the plan, yes",0]]},
+  {c:"money", q:"What is your plan if the markets or your income have a bad year?", o:[
+    ["A written plan I could action tomorrow",3],
+    ["I keep enough back that a bad year will not sink me, and I know the figure",3],
+    ["A rough idea I have thought through",2],
+    ["I will cross that bridge when it comes",0]]},
+  {c:"money", q:"Have you built a buffer, or are you counting on everything going right?", o:[
+    ["A real buffer, sized for things going wrong",3],
+    ["A small one. I know it is thinner than it should be",2],
+    ["I am banking on it mostly going to plan",1],
+    ["No buffer. I will manage",0]]},
+  {c:"money", q:"Are you planning the whole thing around income that does not exist yet?", o:[
+    ["No. The plan stands up on money I already have or earn",3],
+    ["Partly. I have a fallback if the new income is slow",2],
+    ["Mostly future income, and I am hopeful",1],
+    ["Yes. The dream is the plan",0]]},
+  {c:"money", q:"Do you know roughly what daily life actually costs where you are going?", o:[
+    ["Yes, I have built a real monthly figure from real prices",3],
+    ["A decent estimate I have sense-checked",2],
+    ["A rough idea from videos",1],
+    ["No, I will find out when I land",0]]},
+  {c:"money", q:"Have you separated the fantasy budget from the real one?", o:[
+    ["Yes. The real number is higher than the thumbnails and I planned for that",3],
+    ["Getting there. I have stopped believing the cheapest version",2],
+    ["I am still half-hoping the cheap version is true",1],
+    ["I am working off the cheap version",0]]},
+
+  /* ================= EXPECTATIONS AND THE HARD QUESTIONS ================= */
+  {c:"expectations", q:"Picture an ordinary Tuesday out there. Not a holiday Tuesday. What do you see?", o:[
+    ["Something specific and fairly dull, which is the point",3],
+    ["I have thought past the postcard version, mostly",2],
+    ["Beaches, if I am honest",0],
+    ["I have not got that far yet",1]]},
+  {c:"expectations", q:"Have you reckoned with the loneliness that can come with it?", o:[
+    ["Yes, and I know how I would handle it",3],
+    ["I have felt it before, so I know it is real",2],
+    ["I have at least acknowledged it exists",2],
+    ["I assume I will be too busy enjoying it",0]]},
+  {c:"expectations", q:"What will you miss that you cannot replace out there?", o:[
+    ["I have named it and accepted it",3],
+    ["A few things, I have half thought about them",2],
+    ["Nothing, I am sure",1],
+    ["I have not let myself go there",0]]},
+  {c:"expectations", q:"Are you ready, or do you just like the idea of being ready?", o:[
+    ["Ready, and I can show you why",3],
+    ["I like the idea, and I am honest that is where I am",2],
+    ["I think I am ready",1],
+    ["I do not want to examine that question",0]]},
+  {c:"expectations", q:"What is the thing about this you are quietly not looking forward to?", o:[
+    ["I can name it without flinching",3],
+    ["I have named it and planned around it",3],
+    ["There is something. I keep it vague",1],
+    ["Nothing. It is all upside",0]]},
+  {c:"expectations", q:"If it does not work out, what is your honest plan B?", o:[
+    ["A real one I could execute",3],
+    ["Come home, and I have checked I could afford to",2],
+    ["A loose one. Better than nothing",2],
+    ["Failure is not an option I entertain",0]]},
+  {c:"expectations", q:"Have you spoken to anyone who has actually done it, warts and all?", o:[
+    ["Yes, more than one, and I asked the hard questions",3],
+    ["One person, properly",2],
+    ["Only watched it online",1],
+    ["No",1]]},
+  {c:"expectations", q:"What are you expecting this move to fix that it might not?", o:[
+    ["I know its limits. It will not fix everything",3],
+    ["I have a sense some things will not change",2],
+    ["I am expecting it to fix quite a lot",1],
+    ["I have not separated what it can and cannot do",1]]},
+  {c:"expectations", q:"Have you pictured the admin, the visa runs and the dull bits, or just the good stuff?", o:[
+    ["Both. I know the boring side is most of it",3],
+    ["I have glanced at the admin side",2],
+    ["Mostly the good stuff, I will admit",1],
+    ["Just the good stuff",0]]},
+  {c:"expectations", q:"When the novelty wears off around month six, what is left?", o:[
+    ["A life I have actually designed for the long haul",3],
+    ["A rough idea of the routine I want",2],
+    ["I assume it will sort itself out",1],
+    ["Not thought past the exciting part",0]]},
+  {c:"expectations", q:"Do you expect to feel free, or have you thought about what you will do with the freedom?", o:[
+    ["I know what the freedom is for. I have plans for the time",3],
+    ["Some idea, still taking shape",2],
+    ["Mostly I just want the feeling of it",1],
+    ["Freedom is the whole point, I have not thought past it",0]]},
+  {c:"expectations", q:"Have you let yourself imagine it going wrong, not just going well?", o:[
+    ["Yes, in detail, and I am still going",3],
+    ["A little. Enough to have a fallback",2],
+    ["I keep the picture positive on purpose",1],
+    ["No. Imagining it wrong feels like inviting it",0]]}
+
+];
+
+/* ---- Result copy ---- */
+const OVERALL_VERDICT = [
+  {min:80, line:"You have thought this through more honestly than most people ever do. Whatever you decide, you will be deciding it with your eyes open."},
+  {min:60, line:"You have done the real thinking on most of this. Not all of it. There are a couple of corners you have not turned the light on yet."},
+  {min:40, line:"You like this idea, and you have half looked at it. The other half is where the honest work still sits."},
+  {min:0,  line:"Right now this is more a daydream than a plan, and there is no shame in that. Most big changes start exactly here. But it is a daydream, not a plan, not yet."}
+];
+
+const TEASER = [
+  {min:80, line:"A high score does not always mean what you think. The strongest areas are not always where people expect, and neither are the weakest. There is one that breaks the pattern for you. Worth seeing which."},
+  {min:60, line:"One area sits apart from the others. It is not always the one people would guess about themselves. Enter your email to see which, and what would move it."},
+  {min:40, line:"The strongest and weakest areas are rarely where people assume. One stands apart for you. Enter your email to see which it is, and what would shift it."},
+  {min:0,  line:"There is one area that breaks the pattern, and it is rarely the one people expect. Enter your email and I will show you where you actually stand."}
+];
+
+const CAT_LINES = {
+  why:{
+    high:"You know why you are going, and it is not just escape. That is the foundation everything else sits on. You have got it.",
+    mid:"You have got a reason, but some of it is still away from rather than toward. Get clear on the difference before you move. The stuff you are running from tends to pack itself in your case.",
+    low:"You want out more than you have worked out why. That is the most common starting point there is. Sit with the why before anything else. It changes every other answer."
+  },
+  people:{
+    high:"You have faced the people side honestly. The ones you would leave, the ones coming with you, the conversations. That is the part most people skip, and it is the part that pulls them home.",
+    mid:"You have thought about some of the people, not all of them. There is a conversation or two you already know you owe somebody. Have it before you go, not after.",
+    low:"The people part is where you are looking away. Parents, partner, the friends, whoever it is. This is the area that brings folk home within a year. It deserves more honesty than anywhere else."
+  },
+  mindset:{
+    high:"You know yourself. You have named the fear, you know how you handle a bad day, and you are not expecting a move to turn you into someone else. That is the right headspace.",
+    mid:"You are partly honest with yourself about how you would cope. There is still a bit of how hard can it be in there. The hard days are real. Picture one properly.",
+    low:"You are hoping a move changes more than a move can change. Wherever you go, you go too. Be honest about what you are really hoping will shift."
+  },
+  money:{
+    high:"You know your number, you have tracked it, and you have stress tested a bad year. That is not a guess, that is a plan. This is the area most people fool themselves on. You have not.",
+    mid:"You half know the money. A ballpark, not a tracked figure. The gap between what you think you spend and what you actually spend is where leaving plans quietly fall apart. Close it.",
+    low:"This is the I will figure it out somehow answer, and you know it. Money is the one area where hope is not a plan. Track what you actually spend for one month. It is the single most useful thing you can do."
+  },
+  expectations:{
+    high:"You have pictured the ordinary Tuesday, not just the holiday one. You know what you would miss and you have got a plan B. You are seeing this clearly, not through a filter.",
+    mid:"You have looked past the postcard version, mostly. There is still a bit of beach in the picture. Spend time on the ordinary days and the things you cannot replace. That is where the truth lives.",
+    low:"Right now you are picturing the holiday, not the life. The loneliness, the ordinary Tuesday, the thing you will miss. None of it has been faced yet. That is where to start looking."
+  }
+};
+
+/* ============================================================
+   STATE
+   ============================================================ */
+let drawn = [];
+let answers = [];
+let idx = 0;
+
+function shuffle(a){
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+/* Stratified draw: 4 per category, fixed category set so the
+   breakdown always has all five. Question order shuffled so
+   categories interleave. Option order shuffled per question so
+   the honest answer is never in a fixed slot. */
+function buildDraw(){
+  drawn = [];
+  Object.keys(CATS).forEach(cat=>{
+    const pool = shuffle(BANK.filter(q=>q.c===cat).slice());
+    pool.slice(0,4).forEach(q=>{
+      drawn.push({ c:q.c, q:q.q, o: shuffle(q.o.slice()) });
+    });
+  });
+  drawn = shuffle(drawn);
+  answers = new Array(drawn.length).fill(null);
+  idx = 0;
+}
+
+function startQuiz(){
+  buildDraw();
+  document.getElementById('intro').classList.add('hidden');
+  document.getElementById('quiz').classList.remove('hidden');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = drawn[idx];
+  document.getElementById('qcount').textContent = `Question ${idx+1} of ${drawn.length}`;
+  document.getElementById('progressFill').style.width = `${(idx/drawn.length)*100}%`;
+  document.getElementById('qCat').textContent = CATS[q.c];
+  document.getElementById('qText').textContent = q.q;
+
+  const wrap = document.getElementById('qOptions');
+  wrap.innerHTML = '';
+  q.o.forEach((opt,i)=>{
+    const b = document.createElement('button');
+    b.className = 'opt' + (answers[idx]!==null && answers[idx].i===i ? ' selected' : '');
+    b.textContent = opt[0];
+    b.onclick = ()=>selectOption(i, opt[1]);
+    wrap.appendChild(b);
+  });
+
+  document.getElementById('backBtn').style.visibility = idx===0 ? 'hidden' : 'visible';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function selectOption(i, score){
+  answers[idx] = {i, score};
+  renderQuestion();
+  setTimeout(()=>{
+    if(idx < drawn.length-1){ idx++; renderQuestion(); }
+    else { showResult(); }
+  }, 220);
+}
+
+function goBack(){ if(idx>0){ idx--; renderQuestion(); } }
+
+function bandLine(arr, pct){
+  for(const b of arr){ if(pct>=b.min) return b.line; }
+  return arr[arr.length-1].line;
+}
+function catBand(pct){ return pct>=67 ? 'high' : (pct>=34 ? 'mid' : 'low'); }
+
+function computeScores(){
+  let total=0, max=0;
+  const cat = {}; Object.keys(CATS).forEach(c=>cat[c]={t:0,m:0});
+  drawn.forEach((q,n)=>{
+    const s = answers[n] ? answers[n].score : 0;
+    total += s; max += 3;
+    cat[q.c].t += s; cat[q.c].m += 3;
+  });
+  const overall = Math.round((total/max)*100);
+  const cats = {};
+  Object.keys(cat).forEach(c=> cats[c]=Math.round((cat[c].t/cat[c].m)*100));
+  return {overall, cats};
+}
+
+let lastScores = null;
+
+function showResult(){
+  document.getElementById('progressFill').style.width = '100%';
+  lastScores = computeScores();
+  document.getElementById('quiz').classList.add('hidden');
+  document.getElementById('result').classList.remove('hidden');
+  document.getElementById('scoreNum').textContent = lastScores.overall;
+  document.getElementById('gateTeaser').textContent = bandLine(TEASER, lastScores.overall);
+
+  // Build the locked category map. Names shown, figures hidden.
+  // Fixed category order so position never leaks which one stands out.
+  const list = document.getElementById('lockedList');
+  list.innerHTML = '';
+  Object.keys(CATS).forEach(c=>{
+    const row = document.createElement('div');
+    row.className = 'locked-row';
+    row.innerHTML = `
+      <span class="locked-name">${CATS[c]}</span>
+      <span class="locked-fig">
+        <span class="locked-bars"><span></span><span></span><span></span><span></span><span></span></span>
+        <span class="locked-lockicon">Locked</span>
+      </span>`;
+    list.appendChild(row);
+  });
+
+  setTimeout(()=>{ document.getElementById('scoreBar').style.width = lastScores.overall + '%'; }, 80);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function validEmail(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+
+function submitEmail(){
+  const name = document.getElementById('nameInput').value.trim();
+  const val = document.getElementById('emailInput').value.trim();
+  const err = document.getElementById('emailError');
+  if(name === '' || !validEmail(val)){ err.style.display='block'; return; }
+  err.style.display='none';
+
+  submitToAweber(name, val);
+  revealBreakdown();
+}
+
+/* ============================================================
+   AWEBER SUBMISSION  ***WIRED FROM JOHN'S LIVE FORM***
+   ------------------------------------------------------------
+   Built from the raw HTML of the "Subscribe Page Form"
+   (form ID 1048109014, list awlist6916238). Posts into a hidden
+   iframe so the page does not navigate away, so the breakdown
+   unlocks in place while AWeber fires the existing double opt-in
+   confirmation email at the moment of peak curiosity.
+
+   The live form sets meta_required = "name,email", so a name
+   value must be sent or AWeber may reject the submission. The
+   gate now collects a real first name and that is what gets
+   sent. meta_adtracking is set to Could_You_Leave_Quiz so quiz
+   signups show separately from other signups in AWeber reports.
+
+   Field names below are copied verbatim from the live form. Do
+   not rename them. If AWeber ever changes the form, re-pull the
+   raw HTML and update these values.
+   ============================================================ */
+function submitToAweber(name, email){
+  // hidden iframe target, created once
+  let frame = document.getElementById('aweber_sink');
+  if(!frame){
+    frame = document.createElement('iframe');
+    frame.id = 'aweber_sink';
+    frame.name = 'aweber_sink';
+    frame.style.display = 'none';
+    document.body.appendChild(frame);
+  }
+
+  // build a real AWeber form and submit it into the hidden frame
+  const f = document.createElement('form');
+  f.method = 'post';
+  f.action = 'https://www.aweber.com/scripts/addlead.pl';
+  f.acceptCharset = 'UTF-8';
+  f.target = 'aweber_sink';
+  f.style.display = 'none';
+
+  const fields = {
+    meta_web_form_id: '1048109014',
+    meta_split_id: '',
+    listname: 'awlist6916238',
+    redirect: 'https://www.aweber.com/thankyou-coi.htm?m=text',
+    meta_redirect_onlist: 'https://www.aweber.com/thankyou-coi.htm?m=text',
+    meta_adtracking: 'Could_You_Leave_Quiz',
+    meta_message: '1',
+    meta_required: 'name,email',
+    name: name,
+    email: email
+  };
+
+  Object.keys(fields).forEach(k=>{
+    const inp = document.createElement('input');
+    inp.type = 'hidden';
+    inp.name = k;
+    inp.value = fields[k];
+    f.appendChild(inp);
+  });
+
+  document.body.appendChild(f);
+  try { f.submit(); } catch(e) { console.error('AWeber submit failed', e); }
+  setTimeout(()=>{ try{ document.body.removeChild(f); }catch(e){} }, 1000);
+}
+
+function revealBreakdown(){
+  document.getElementById('result').classList.add('hidden');
+  document.getElementById('breakdown').classList.remove('hidden');
+
+  // verdict line now lives behind the gate
+  document.getElementById('verdict').textContent = bandLine(OVERALL_VERDICT, lastScores.overall);
+
+  const wrap = document.getElementById('catBreakdown');
+  wrap.innerHTML = '';
+
+  // worst first, so the standout area leads
+  const order = Object.keys(CATS).sort((a,b)=> lastScores.cats[a]-lastScores.cats[b]);
+
+  order.forEach(c=>{
+    const pct = lastScores.cats[c];
+    const band = catBand(pct);
+    const colour = pct>=67 ? 'var(--positive)' : (pct>=34 ? 'var(--accent-light)' : 'var(--negative)');
+    const row = document.createElement('div');
+    row.className = 'cat-row';
+    row.innerHTML = `
+      <div class="cat-head">
+        <span class="cat-name">${CATS[c]}</span>
+        <span class="cat-pct" style="color:${colour}">${pct}%</span>
+      </div>
+      <div class="cat-bar-track"><div class="cat-bar-fill" style="width:0;background:${colour}" data-w="${pct}"></div></div>
+      <div class="cat-line">${CAT_LINES[c][band]}</div>`;
+    wrap.appendChild(row);
+  });
+
+  setTimeout(()=>{
+    document.querySelectorAll('.cat-bar-fill').forEach(el=>{ el.style.width = el.dataset.w + '%'; });
+  }, 80);
+
+  buildShare();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---- Share moment: recruit the next person ----
+   The shared text carries the score and the quiz link, so the
+   recipient lands on the quiz and takes it themselves. */
+function buildShare(){
+  // QUIZ_URL: the public address of this page once hosted.
+  // John sets window.QUIZ_URL to the live URL at deploy. Until
+  // then this PLACEHOLDER is used so the shared link is always a
+  // real web address, never a local file path. REPLACE before launch.
+  const QUIZ_URL = (window.QUIZ_URL || 'https://johntalksabout.com/could-you-leave');
+  const score = lastScores.overall;
+  const line = `I scored ${score}% on John's Could You Leave quiz. It is not about whether you go, it is about how honestly you have thought it through. See where you land: ${QUIZ_URL}`;
+  document.getElementById('shareText').textContent = line;
+
+  // Show the native share button only where the browser supports it.
+  if(navigator.share){
+    document.getElementById('nativeShareBtn').style.display = 'inline-block';
+  }
+}
+
+function copyShare(){
+  const text = document.getElementById('shareText').textContent;
+  const status = document.getElementById('shareStatus');
+  const done = ()=>{ status.textContent = 'Copied. Send it to whoever came to mind.'; };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done).catch(fallbackCopy.bind(null,text,done));
+  } else {
+    fallbackCopy(text, done);
+  }
+}
+
+function fallbackCopy(text, done){
+  const ta = document.createElement('textarea');
+  ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand('copy'); done(); }catch(e){}
+  document.body.removeChild(ta);
+}
+
+function nativeShare(){
+  const text = document.getElementById('shareText').textContent;
+  if(navigator.share){
+    navigator.share({ title:'Could You Leave?', text }).catch(()=>{});
+  }
+}
+
+['nameInput','emailInput'].forEach(id=>{
+  document.getElementById(id).addEventListener('keydown', e=>{
+    if(e.key==='Enter') submitEmail();
+  });
+});
+</script>
+</body>
+</html>
