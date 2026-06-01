@@ -923,11 +923,10 @@ function revealBreakdown(){
    The shared text carries the score and the quiz link, so the
    recipient lands on the quiz and takes it themselves. */
 function buildShare(){
-  // QUIZ_URL: the public address of this page once hosted.
-  // John sets window.QUIZ_URL to the live URL at deploy. Until
-  // then this PLACEHOLDER is used so the shared link is always a
-  // real web address, never a local file path. REPLACE before launch.
-  const QUIZ_URL = (window.QUIZ_URL || 'https://johntalksabout.com/could-you-leave');
+  // QUIZ_URL: the public address of this page.
+  // Live on GitHub Pages. window.QUIZ_URL can still override this
+  // if the quiz ever moves.
+  const QUIZ_URL = (window.QUIZ_URL || 'https://johntalksabout.github.io/could-you-leave/');
   const score = lastScores.overall;
   const line = `I scored ${score}% on John's Could You Leave quiz. It is not about whether you go, it is about how honestly you have thought it through. See where you land: ${QUIZ_URL}`;
   document.getElementById('shareText').textContent = line;
