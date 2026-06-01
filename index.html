@@ -149,6 +149,15 @@ h1{
 .share-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
 .share-status{display:block;font-size:13px;color:var(--positive);margin-top:12px;min-height:16px}
 
+.patreon{border-top:1px solid var(--border);margin-top:8px;padding-top:28px}
+.patreon-body{font-size:16px;color:var(--text);margin-bottom:14px}
+.patreon-link{
+  display:inline-block;font-family:'DM Sans',sans-serif;font-weight:500;font-size:16px;
+  color:var(--white);background:var(--accent);border:1px solid var(--accent-light);
+  border-radius:4px;padding:14px 28px;text-decoration:none;transition:background 0.15s ease;
+}
+.patreon-link:hover{background:var(--accent-light)}
+
 .gate{
   background:var(--card);border:1px solid var(--border);border-radius:4px;padding:28px;margin-top:28px;
 }
@@ -289,6 +298,12 @@ h1{
         <button class="btn-ghost" id="nativeShareBtn" onclick="nativeShare()" style="display:none">Share</button>
       </div>
       <span class="share-status" id="shareStatus"></span>
+    </div>
+
+    <!-- score-banded Patreon CTA: final section, one of three versions by overall score -->
+    <div class="patreon" id="patreon">
+      <p class="patreon-body" id="patreonBody"></p>
+      <a class="patreon-link" id="patreonLink" href="https://patreon.com/johntalksabout" target="_blank" rel="noopener">patreon.com/johntalksabout</a>
     </div>
   </section>
 
@@ -656,6 +671,15 @@ const TEASER = [
   {min:0,  line:"There is one area that breaks the pattern, and it is rarely the one people expect. Enter your email and I will show you where you actually stand."}
 ];
 
+/* Score-banded Patreon CTA bodies. Used verbatim. The trailing
+   patreon.com/johntalksabout in the brief is rendered as the
+   clickable link beneath, so it is not repeated in the body. */
+const PATREON_CTA = [
+  {min:66, line:"You have thought this through more honestly than most people ever do. The next part is not more quizzes. It is talking to people who are further down the same road, or right beside you on it. That is what happens on the monthly Room call."},
+  {min:45, line:"This is the interesting bit. You have done real work, and you have found the gaps. That is the stage where talking it through with people who are in the same place actually moves things. That is what The Room is. A monthly call, real numbers, no performance."},
+  {min:0,  line:"You are early in this, and that is fine. Early is honest. If you want to keep looking rather than let it drift for another year, The Room on Patreon is a small group of people doing exactly that. Working it out, out loud, with someone who has done it."}
+];
+
 const CAT_LINES = {
   why:{
     high:"You know why you are going, and it is not just escape. That is the foundation everything else sits on. You have got it.",
@@ -916,6 +940,7 @@ function revealBreakdown(){
   }, 80);
 
   buildShare();
+  document.getElementById('patreonBody').textContent = bandLine(PATREON_CTA, lastScores.overall);
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
