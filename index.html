@@ -268,7 +268,7 @@ h1{
       <div class="email-row">
         <input type="text" id="nameInput" placeholder="First name" autocomplete="given-name">
         <input type="email" id="emailInput" placeholder="your@email.com" autocomplete="email">
-        <button class="btn" onclick="submitEmail()">Unlock my breakdown</button>
+        <button class="btn" id="unlockBtn" onclick="submitEmail()">Unlock my breakdown</button>
       </div>
       <div class="error" id="emailError">Pop your first name and a real email in and I will show you the breakdown.</div>
       <p class="fineprint">This puts you on Slow Travel Letters, the same thing I write every Friday. One honest email a week. Leave any time, no hard feelings. John</p>
@@ -837,6 +837,10 @@ function submitEmail(){
   const err = document.getElementById('emailError');
   if(name === '' || !validEmail(val)){ err.style.display='block'; return; }
   err.style.display='none';
+
+  // prevent a fast double-tap firing two POSTs / two confirmation emails
+  const btn = document.getElementById('unlockBtn');
+  if(btn){ if(btn.disabled){ return; } btn.disabled = true; }
 
   submitToAweber(name, val);
   revealBreakdown();
